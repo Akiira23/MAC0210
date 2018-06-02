@@ -2,6 +2,8 @@
 #include <math.h>
 #include <stdlib.h>
 
+//troca posicoes no vetor m se m_true e igual a 1 e no vetor p caso contrario
+//nas posicoes i_a com a i_b.
 void swap(int i_a, int i_b, int m_true, float *m, int *p){
 	if (m_true) {
 		float aux;
@@ -16,8 +18,9 @@ void swap(int i_a, int i_b, int m_true, float *m, int *p){
 		p[i_b] = aux;		
 	}
 }
-
+//loop da decomposicao
 void lu (float *m, int n, int *p){
+	//vetor da permutacao
 	for (int i = 0; i < n; ++i)
 		p[i] = i;
 	for (int k = 0; k < n - 1; ++k){
@@ -25,6 +28,7 @@ void lu (float *m, int n, int *p){
 		int i_max = i_first;
 		float v_max = m[i_first];
 		int p_i = 0;
+		//busca o maior elemento da coluna i
 		for (int i = k + 1; i < n; ++i){
 			int i_col = n*i + k;
 			if (m[i_col] > v_max){
@@ -33,6 +37,7 @@ void lu (float *m, int n, int *p){
 				p_i = i;
 			}
 		}
+		//se houve permutacao troca suas posicoes
 		if (i_max > i_first){
 			int i_a = i_first;
 			int i_b = i_max;
@@ -40,6 +45,7 @@ void lu (float *m, int n, int *p){
 				swap(i_a, i_b, 1, m, p);
 			swap(k, p_i, 0, m, p);
 		}
+		//faz L e U inplace no vetor m[]
 		for (int i = k + 1; i < n; ++i){
 			int i_col = n*i + k;
 			m[i_col] = m[i_col]/m[i_first];
