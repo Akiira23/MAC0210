@@ -1,2 +1,2 @@
 # MAC0210
-Decomposicao PA = LU
+Decomposicao PA = LU em codigo C
